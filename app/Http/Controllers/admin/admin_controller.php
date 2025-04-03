@@ -95,22 +95,23 @@ class admin_controller extends Controller
         return view("admin.purchase.purchase");
     }
 
-    public function getSaleReport()
+    public function getSaleReport(Request $request)
     {
-        $apiUrl = "http://127.0.0.1:8081/api/saleReports";
+        $apiUrlSales = "http://127.0.0.1:8081/api/saleReports";
+        $apiUrlFilteredSales = "http://127.0.0.1:8081/api/saleFillterByDates";
 
-        $res = Http::get($apiUrl);
+        $resSales = Http::get($apiUrlSales);
+        $saleReports = $resSales->successful() ? $resSales->json()['data'] : [];
 
-        if ($res->successful()) {
+        $resSaleFilter = Http::get($apiUrlFilteredSales);
+        $saleReportFilter = $resSaleFilter->successful() ? $resSaleFilter->json()['data'] : [];
 
-            $saleReports = $res->json()['data'];
-        } else {
-
-            $saleReports = [];
-        }
-
-        return view('admin.report.saleReport', ['sales' => $saleReports]);
+        return view('admin.report.saleReport', [
+            'sales' => $saleReports,
+            'saleReportFilterByDates' => $saleReportFilter
+        ]);
     }
+
 
     function inventoryReport()
     {
@@ -118,9 +119,9 @@ class admin_controller extends Controller
 
         $res = Http::get($apiUrl);
 
-        if($res->successful()){
+        if ($res->successful()) {
             $inventoryReports = $res->json()['data'];
-        }else{
+        } else {
             $inventoryReports = [];
         }
 
@@ -148,9 +149,9 @@ class admin_controller extends Controller
 
         $res = Http::get($apiUrl);
 
-        if($res->successful()){
+        if ($res->successful()) {
             $edclReports = $res->json()['data'];
-        }else{
+        } else {
             $edclReports = [];
         }
 
@@ -168,9 +169,9 @@ class admin_controller extends Controller
 
         $res = Http::get($apiUrl);
 
-        if($res->successful()){
+        if ($res->successful()) {
             $incomeReports = $res->json()['data'];
-        }else{
+        } else {
             $incomeReports = [];
         }
 
@@ -183,16 +184,14 @@ class admin_controller extends Controller
 
         $res = Http::get($apiUrl);
 
-        if($res->successful()){
+        if ($res->successful()) {
             $vatReports = $res->json()['data'];
-        }else{
+        } else {
             $res = [];
         }
 
         return view('admin.report.vatReport', ['vats' => $vatReports]);
     }
-
-
 
     function exchangeRate()
     {

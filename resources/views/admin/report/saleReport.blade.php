@@ -21,53 +21,53 @@
             </div>
 
             <div class="d-flex justify-content-between align-items-center card-header">
-                <div class="search-container" style="display: flex; flex-direction: row;">
+                <div class="search-container">
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="bx bx-search"></i></span>
                         <input type="text" name="txtSearch" class="form-control" placeholder="Search" />
                     </div>
 
-                    <div class="dropdown" style="margin-left: 20px;">
+                    <div class="dropdown" style="padding-left: 10px;">
                         <button class="btn btn-primary dropdown-toggle" type="button" id="columnDropdown" data-bs-toggle="dropdown">
-                            Choose Columns
+                            Select Fields
                         </button>
                         <div class="dropdown-menu">
                             <ul aria-labelledby="columnDropdown">
                                 <div class="form-check">
                                     <input class="form-check-input column-toggle" type="checkbox" data-column="0" checked />
-                                    <label class="form-check-label" for="defaultCheck3"> Customer Name </label>
+                                    <label class="form-check-label" for="defaultCheck3"> Id </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input column-toggle" type="checkbox" data-column="1" checked />
-                                    <label class="form-check-label" for="defaultCheck3"> Reference </label>
+                                    <label class="form-check-label" for="defaultCheck3"> Sale Date </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input column-toggle" type="checkbox" data-column="2" checked />
-                                    <label class="form-check-label" for="defaultCheck3"> Date </label>
+                                    <label class="form-check-label" for="defaultCheck3"> Customer </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input column-toggle" type="checkbox" data-column="3" checked />
-                                    <label class="form-check-label" for="defaultCheck3"> Status </label>
+                                    <label class="form-check-label" for="defaultCheck3"> Invoice </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input column-toggle" type="checkbox" data-column="4" checked />
-                                    <label class="form-check-label" for="defaultCheck3"> Grand Total </label>
+                                    <label class="form-check-label" for="defaultCheck3"> Exchange Rate </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input column-toggle" type="checkbox" data-column="5" checked />
-                                    <label class="form-check-label" for="defaultCheck3"> Paid </label>
+                                    <label class="form-check-label" for="defaultCheck3"> Vat </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input column-toggle" type="checkbox" data-column="6" checked />
-                                    <label class="form-check-label" for="defaultCheck3"> Due </label>
+                                    <label class="form-check-label" for="defaultCheck3"> Subtotal </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input column-toggle" type="checkbox" data-column="7" checked />
-                                    <label class="form-check-label" for="defaultCheck3"> Payment Status </label>
+                                    <label class="form-check-label" for="defaultCheck3"> Member Discount </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input column-toggle" type="checkbox" data-column="8" checked />
-                                    <label class="form-check-label" for="defaultCheck3"> Biller </label>
+                                    <label class="form-check-label" for="defaultCheck3"> Total </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input column-toggle" type="checkbox" data-column="9" checked />
@@ -78,84 +78,31 @@
                     </div>
                 </div>
 
-                <div style="display: flex; flex-direction: row;">
-                    <button style="margin-right: 10px;" id="filter-dropdown" class="btn btn-icon btn-primary">
-                        <span class="tf-icons bx bx-filter-alt"></span>
-                    </button>
+                <div style="display: flex; flex-direction: row; padding-left: 20px; align-items: center;">
+                    <label class="form-label" for="start-date" style="padding-top: 10px;">Start Date:</label>
+                    <div style="padding-left: 10px;">
+                        <input class="form-control" id="start-date" name="startDate" type="date" />
+                    </div>
 
-                    <script>
-                        $(document).ready(function() {
+                    <label class="form-label" for="end-date" style="padding-left: 10px; padding-top: 10px;">End Date:</label>
+                    <div style="padding-left: 10px;">
+                        <input class="form-control" id="end-date" name="endDate" type="date" />
+                    </div>
 
-                            $("form").hide();
-
-                            $("#filter-dropdown").click(function() {
-                                $("form").slideToggle('slow');
-
-                                $(this).find("span").toggleClass("bx-filter-alt bx-x");
-                            });
-                        });
-                    </script>
-
-                    <select class="form-select" id="sort-by-date" aria-label="Sort-By-Date">
-                        <option selected>Sort-By-Date</option>
-                        <option value="1">21-2-2025</option>
-                        <option value="2">22-2-2025</option>
-                        <option value="3">23-2-2025</option>
-                    </select>
+                    <div style="padding-left: 10px;">
+                        <button class="btn btn-icon btn-primary" id="filter-button">
+                            <i class="bx bx-search"></i>
+                        </button>
+                    </div>
                 </div>
+
             </div>
             <div class="card-body">
-                <form action="{{ url('/admin/saleReport') }}">
-                    <div class="row" style="margin-bottom: 20px;">
-                        <div class="col-3">
-                            <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-user"></i></span>
-                                <select class="form-select" aria-label="customer-selection">
-                                    <option selected>Choose Customer Name</option>
-                                    <option value="1">Kane</option>
-                                    <option value="2">Denny</option>
-                                    <option value="3">David</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-stop-circle"></i></span>
-                                <select class="form-select" aria-label="status-selection">
-                                    <option selected>Choose Status</option>
-                                    <option value="1">Kane</option>
-                                    <option value="2">Denny</option>
-                                    <option value="3">David</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-file"></i></span>
-                                <input type="text" name="txtName" class="form-control" placeholder="Enter Reference" />
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-stop-circle"></i></span>
-                                <select class="form-select" aria-label="payment-status-selection">
-                                    <option selected>Choose Payment Status</option>
-                                    <option value="1">Kane</option>
-                                    <option value="2">Denny</option>
-                                    <option value="3">David</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-bottom: 20px;">
-                        <div class="col-2">
-                            <button class="btn btn-primary">
-                                <span class="tf-icons bx bx-search"></span>
-                                Search
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                
+                <script>
+
+                </script>
+
                 <div class="table-responsive text-nowrap">
                     <table class="table" id="saleReport">
                         <caption class="ms-4">
@@ -182,7 +129,7 @@
                             {{-- @foreach($cus as $rw) --}}
                             @foreach($sales as $sale)
                             <tr>
-                                <td class="text-center"><strong>{{ $sale['id'] }}</strong></td>
+                                <td class="text-center"><strong>{{ $i }}</strong></td>
                                 <td class="text-center"><strong>{{ \Carbon\Carbon::parse($sale['sale_date'])->format('d-M-Y') }}</strong></td>
                                 <td class="text-center"><strong>{{ $sale['customer_name'] }}</strong></td>
                                 <td class="text-center"><strong>{{ $sale['invoice_no'] }}</strong></td>

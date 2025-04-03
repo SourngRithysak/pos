@@ -34,8 +34,9 @@
 
   <style>
     .search-container {
-      position: relative;
-      display: inline-block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .quantity-selector {

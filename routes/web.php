@@ -188,9 +188,6 @@ Route::get('/admin/expenseReport', [admin_controller::class, 'expenseReport']);
 Route::get('/admin/incomeReport', [admin_controller::class, 'incomeReport']);
 Route::get('/admin/vatReport', [admin_controller::class, 'vatReport']);
 
-
-
-
 // User
 Route::get('/admin/users', [admin_controller::class, 'user']);
 Route::get('/admin/addUser', [admin_controller::class, 'addUser']);
